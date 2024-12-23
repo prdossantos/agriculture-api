@@ -1,0 +1,1002 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/producers": {
+      "post": {
+        "operationId": "ProducerController_create",
+        "summary": "Create a new producer",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProducerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The record has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseProducerDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Invalid documentId"
+                  ],
+                  "meta": {
+                    "requestId": "62a3de49-a5e9-46ef-b17b-2849a601752c",
+                    "timestamp": "2024-12-23T09:48:42.149Z"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Producer already exists",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Producer already exists"
+                  ],
+                  "meta": {
+                    "requestId": "88ffd0f7-54a9-462b-959b-0b4cb8798ed6",
+                    "timestamp": "2024-12-23T09:48:42.149Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Producers"
+        ]
+      },
+      "get": {
+        "operationId": "ProducerController_findAll",
+        "summary": "List all producers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "List of producers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseProducersDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Producers"
+        ]
+      }
+    },
+    "/v1/producers/{producerId}": {
+      "patch": {
+        "operationId": "ProducerController_update",
+        "summary": "Update a producer",
+        "parameters": [
+          {
+            "name": "producerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProducerDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producer updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseProducerDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Invalid documentId"
+                  ],
+                  "meta": {
+                    "requestId": "01798528-475e-4ec3-bfd9-554f628e57e5",
+                    "timestamp": "2024-12-23T09:48:42.150Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Producer not found"
+                  ],
+                  "meta": {
+                    "requestId": "002c8215-a3df-4207-ac43-5a7e92617346",
+                    "timestamp": "2024-12-23T09:48:42.150Z"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Producer already exists",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Producer already exists"
+                  ],
+                  "meta": {
+                    "requestId": "bbb4a89c-1a43-49eb-a5e0-0ddc1809e15e",
+                    "timestamp": "2024-12-23T09:48:42.150Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Producers"
+        ]
+      },
+      "delete": {
+        "operationId": "ProducerController_delete",
+        "summary": "Delete a producer",
+        "parameters": [
+          {
+            "name": "producerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producer deleted"
+          },
+          "404": {
+            "description": "Producer not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Producer not found"
+                  ],
+                  "meta": {
+                    "requestId": "7e1a856b-e85b-4296-a456-f26f1ca3d01b",
+                    "timestamp": "2024-12-23T09:48:42.150Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Producers"
+        ]
+      }
+    },
+    "/v1/producers/{producerId}/farms": {
+      "post": {
+        "operationId": "FarmController_create",
+        "summary": "Create a new farm",
+        "parameters": [
+          {
+            "name": "producerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFarmDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The record has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseFarmDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Invalid documentId"
+                  ],
+                  "meta": {
+                    "requestId": "cca10535-2f6e-417a-83c8-73b8ce4574b3",
+                    "timestamp": "2024-12-23T09:48:42.155Z"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Farm already exists",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Farm already exists"
+                  ],
+                  "meta": {
+                    "requestId": "df4388df-464a-4e8b-94f8-8b9bd04d8abf",
+                    "timestamp": "2024-12-23T09:48:42.155Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Farms"
+        ]
+      },
+      "get": {
+        "operationId": "FarmController_findAll",
+        "summary": "List all farms",
+        "parameters": [
+          {
+            "name": "producerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of farms",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseFarmsDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Farms"
+        ]
+      }
+    },
+    "/v1/producers/{producerId}/farms/{farmId}": {
+      "patch": {
+        "operationId": "FarmController_update",
+        "summary": "Update a farm",
+        "parameters": [
+          {
+            "name": "producerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "farmId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFarmDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Farm updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseFarmDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Invalid documentId"
+                  ],
+                  "meta": {
+                    "requestId": "726f4be5-687d-4e3b-b7ca-15686fd0bd72",
+                    "timestamp": "2024-12-23T09:48:42.155Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Farm not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Farm not found"
+                  ],
+                  "meta": {
+                    "requestId": "ff29ac3a-8870-4bf1-a1c3-5daa9568b076",
+                    "timestamp": "2024-12-23T09:48:42.155Z"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Farm already exists",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Farm already exists"
+                  ],
+                  "meta": {
+                    "requestId": "116c6285-f93c-4f77-aea2-1d6662dd1ccc",
+                    "timestamp": "2024-12-23T09:48:42.155Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Farms"
+        ]
+      },
+      "delete": {
+        "operationId": "FarmController_delete",
+        "summary": "Delete a farm",
+        "parameters": [
+          {
+            "name": "producerId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "farmId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Farm deleted"
+          },
+          "404": {
+            "description": "Farm not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "errors": [
+                    "Farm not found"
+                  ],
+                  "meta": {
+                    "requestId": "f56de51c-af6f-4d57-b75c-480c79ef88da",
+                    "timestamp": "2024-12-23T09:48:42.155Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Farms"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Agriculture API",
+    "description": "API for managing producers and farms",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "Producers",
+      "description": ""
+    },
+    {
+      "name": "Farms",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CreateProducerDto": {
+        "type": "object",
+        "properties": {
+          "documentId": {
+            "description": "The user CPF or CNPJ, with exactly 11 or 14 digits",
+            "type": "string",
+            "pattern": "^[0-9]{11}$|^[0-9]{14}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Producer name (cannot be empty)"
+          }
+        },
+        "required": [
+          "documentId",
+          "name"
+        ]
+      },
+      "ResponseProducerDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "default": true,
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Producer identifier",
+                "required": false
+              },
+              "documentId": {
+                "description": "The user CPF or CNPJ, with exactly 11 or 14 digits",
+                "type": "string",
+                "pattern": "^[0-9]{11}$|^[0-9]{14}$",
+                "required": true
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Producer name (cannot be empty)",
+                "required": true
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Creation date",
+                "required": false
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last update date",
+                "required": false
+              },
+              "deletedAt": {
+                "default": null,
+                "type": "string",
+                "format": "date-time",
+                "description": "Deletion date",
+                "required": false
+              }
+            },
+            "title": "CreateProducerDto",
+            "description": "Schema for a Producer"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "requestId": {
+                "type": "string",
+                "format": "uuid",
+                "required": true
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last update date",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "ResponseProducersDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "default": true,
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "Producer identifier",
+                  "required": false
+                },
+                "documentId": {
+                  "description": "The user CPF or CNPJ, with exactly 11 or 14 digits",
+                  "type": "string",
+                  "pattern": "^[0-9]{11}$|^[0-9]{14}$",
+                  "required": true
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Producer name (cannot be empty)",
+                  "required": true
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Creation date",
+                  "required": false
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Last update date",
+                  "required": false
+                },
+                "deletedAt": {
+                  "default": null,
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Deletion date",
+                  "required": false
+                }
+              },
+              "required": [
+                "documentId",
+                "name"
+              ],
+              "title": "CreateProducerDto",
+              "description": "Schema for a Producer"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "requestId": {
+                "type": "string",
+                "format": "uuid",
+                "required": true
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last update date",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "UpdateProducerDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Producer identifier"
+          },
+          "documentId": {
+            "description": "The user CPF or CNPJ, with exactly 11 or 14 digits",
+            "type": "string",
+            "pattern": "^[0-9]{11}$|^[0-9]{14}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Producer name (cannot be empty)"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update date"
+          },
+          "deletedAt": {
+            "default": null,
+            "type": "string",
+            "format": "date-time",
+            "description": "Deletion date"
+          }
+        }
+      },
+      "CreateFarmDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Farm name (cannot be empty)"
+          },
+          "city": {
+            "type": "string",
+            "description": "City where the farm is located"
+          },
+          "state": {
+            "type": "string",
+            "description": "State where the farm is located"
+          },
+          "totalArea": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Total area of the farm in hectares"
+          },
+          "agriculturalArea": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Agricultural area in hectares"
+          },
+          "vegetationArea": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Vegetation area in hectares"
+          }
+        },
+        "required": [
+          "name",
+          "totalArea",
+          "agriculturalArea",
+          "vegetationArea"
+        ]
+      },
+      "ResponseFarmDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "default": true,
+            "type": "boolean"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Farm identifier",
+                "required": false
+              },
+              "producerId": {
+                "type": "integer",
+                "description": "Producer identifier",
+                "required": false
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Farm name (cannot be empty)",
+                "required": true
+              },
+              "city": {
+                "type": "string",
+                "description": "City where the farm is located",
+                "required": false
+              },
+              "state": {
+                "type": "string",
+                "description": "State where the farm is located",
+                "required": false
+              },
+              "totalArea": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Total area of the farm in hectares",
+                "required": true
+              },
+              "agriculturalArea": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Agricultural area in hectares",
+                "required": true
+              },
+              "vegetationArea": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Vegetation area in hectares",
+                "required": true
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Creation date",
+                "required": false
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last update date",
+                "required": false
+              },
+              "deletedAt": {
+                "default": null,
+                "type": "string",
+                "format": "date-time",
+                "description": "Deletion date",
+                "required": false
+              }
+            },
+            "title": "CreateFarmDto",
+            "description": "Schema for a Farm"
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "requestId": {
+                "type": "string",
+                "format": "uuid",
+                "required": true
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last update date",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "ResponseFarmsDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "default": true,
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "description": "Farm identifier",
+                  "required": false
+                },
+                "producerId": {
+                  "type": "integer",
+                  "description": "Producer identifier",
+                  "required": false
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Farm name (cannot be empty)",
+                  "required": true
+                },
+                "city": {
+                  "type": "string",
+                  "description": "City where the farm is located",
+                  "required": false
+                },
+                "state": {
+                  "type": "string",
+                  "description": "State where the farm is located",
+                  "required": false
+                },
+                "totalArea": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Total area of the farm in hectares",
+                  "required": true
+                },
+                "agriculturalArea": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Agricultural area in hectares",
+                  "required": true
+                },
+                "vegetationArea": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Vegetation area in hectares",
+                  "required": true
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Creation date",
+                  "required": false
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Last update date",
+                  "required": false
+                },
+                "deletedAt": {
+                  "default": null,
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Deletion date",
+                  "required": false
+                }
+              },
+              "required": [
+                "name",
+                "totalArea",
+                "agriculturalArea",
+                "vegetationArea"
+              ],
+              "title": "CreateFarmDto",
+              "description": "Schema for a Farm"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "requestId": {
+                "type": "string",
+                "format": "uuid",
+                "required": true
+              },
+              "timestamp": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last update date",
+                "required": false
+              }
+            }
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "UpdateFarmDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Farm identifier"
+          },
+          "producerId": {
+            "type": "integer",
+            "description": "Producer identifier"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Farm name (cannot be empty)"
+          },
+          "city": {
+            "type": "string",
+            "description": "City where the farm is located"
+          },
+          "state": {
+            "type": "string",
+            "description": "State where the farm is located"
+          },
+          "totalArea": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Total area of the farm in hectares"
+          },
+          "agriculturalArea": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Agricultural area in hectares"
+          },
+          "vegetationArea": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Vegetation area in hectares"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation date"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last update date"
+          },
+          "deletedAt": {
+            "default": null,
+            "type": "string",
+            "format": "date-time",
+            "description": "Deletion date"
+          }
+        }
+      }
+    }
+  }
+}
