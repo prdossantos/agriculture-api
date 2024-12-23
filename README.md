@@ -17,6 +17,18 @@ A **Agriculture API** é uma aplicação modular de backend projetada para geren
 - **Redis**: Utilizado como cache para maior eficiência em acessos repetitivos.
 
 ---
+## Logs
+
+Os logs da aplicação são gerados utilizando a biblioteca **Pino**. Cada chamada recebe um `requestId` único para facilitar o rastreamento e a correlação de eventos. Os logs são gravados no arquivo `logs/app.log`.
+
+```plaintext
+logs/
+└── app.log
+```
+
+Essa abordagem garante que todas as requisições e respostas sejam registradas de forma eficiente, permitindo uma melhor análise e depuração do sistema.
+
+---
 
 ## Estrutura de Pastas
 

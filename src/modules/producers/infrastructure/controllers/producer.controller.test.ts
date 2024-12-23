@@ -7,6 +7,7 @@ import { DeleteProducerUseCase } from '../../application/use-cases/delete-produc
 import { CreateProducerDto } from '../../application/dto/create-producer.dto';
 import { UpdateProducerDto } from '../../application/dto/update-producer.dto';
 import { Producer } from '../../domain/entities/producer.entity';
+import { GetProducerByIdUseCase } from '../../application/use-cases/get-producer-by-id.use-case';
 
 describe('ProducerController', () => {
   let controller: ProducerController;
@@ -33,6 +34,10 @@ describe('ProducerController', () => {
         },
         {
           provide: DeleteProducerUseCase,
+          useValue: { execute: jest.fn() },
+        },
+        {
+          provide: GetProducerByIdUseCase,
           useValue: { execute: jest.fn() },
         },
       ],
