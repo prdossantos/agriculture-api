@@ -1,5 +1,8 @@
 # Agriculture API
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e73b1a449d70473191d6c0771d6ee0f8)](https://app.codacy.com/gh/prdossantos/agriculture-api/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/e73b1a449d70473191d6c0771d6ee0f8)](https://app.codacy.com/gh/prdossantos/agriculture-api/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+
 ## Visão Geral
 
 A **Agriculture API** é uma aplicação modular de backend projetada para gerenciar produtores e fazendas, seguindo os princípios de Domain-Driven Design (DDD). Desenvolvida com NestJS, TypeORM e Redis, a aplicação é escalável, performática e fácil de manter.
